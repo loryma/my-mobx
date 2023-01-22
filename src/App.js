@@ -1,25 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import './timer';
+import { observable, autorun } from "mobx";
+import { observer } from 'mobx-react';
+// import './timer';
+
+const obj = observable({ count: 0});
+setInterval(() => obj.count++, 500);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>{obj.count}</div>
     </div>
   );
 }
 
-export default App;
+export default observer(App);
