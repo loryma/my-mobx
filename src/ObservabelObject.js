@@ -1,7 +1,7 @@
 import { ObservableValue } from "./ObservableValue";
 import { isFunction } from './utils';
 
-export class ObservableValue {
+export class ObservableObject {
   constructor(target) {
     this._target = target;
     this._values = Object.fromEntries(

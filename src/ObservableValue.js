@@ -1,10 +1,12 @@
 import { globalState } from './GlobalState';
-import { isPrimitive, isObservable } from './utils';
+import { isPrimitive, isObservable, isPureObject } from './utils';
 import { $$observable } from './constants';
+import { observableObject } from './observableObject';
 
 function enhancer(value) {
   if (isObservable(value)) return value;
   if (isPrimitive(value)) return value;
+  if (isPureObject(value)) return observableObject(value);
   return value;
 }
 

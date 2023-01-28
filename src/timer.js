@@ -1,16 +1,18 @@
-import { ObservableValue } from './ObservableValue';
+import { observableObject } from './observableObject';
 import { autorun } from './autorun';
 
-const counter = new ObservableValue(0);
+const counter = observableObject({ count: 0 });
+
+console.log(counter);
 
 function listener() {
-  console.log(counter.get());
+  console.log(counter.count);
 };
 
 autorun(listener);
 
 function increment() {
-  counter.set(counter.get() + 1);
+  counter.count++;
 }
 
 setInterval(increment, 500);

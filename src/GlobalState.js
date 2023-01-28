@@ -1,5 +1,5 @@
 class GlobalState {
-    trackingDerivation = null;
+  trackingDerivation = null;
 };
 
 export const globalState = new GlobalState();
