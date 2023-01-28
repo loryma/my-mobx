@@ -1,16 +1,16 @@
-import { observable, autorun } from "mobx";
+import { ObservableValue } from './ObservableValue';
+import { autorun } from './autorun';
 
-const counter = observable({ count: 0 });
+const counter = new ObservableValue(0);
 
 function listener() {
-   console.log(counter.count);
+  console.log(counter.get());
 };
 
-const dispose = autorun(listener);
+autorun(listener);
 
 function increment() {
-  counter.count++;
+  counter.set(counter.get() + 1);
 }
 
 setInterval(increment, 500);
-setTimeout(dispose, 1600);
