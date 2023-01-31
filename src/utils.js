@@ -13,7 +13,8 @@ export function isPrimitive(arg) {
 }
 
 export function isObservable(value) {
-  if (value) return $$observable in value;
+  console.log('isObs', value[$$observable]);
+  if (value) return !!value[$$observable];
 
   return false;
 };

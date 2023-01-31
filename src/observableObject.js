@@ -2,7 +2,7 @@ import { $$observableAdmin } from "./constants";
 import { ObservableObject } from "./ObservabelObject";
 
 function observableObject(target) {
-  Object.defineProperties(target, $$observableAdmin, {
+  Object.defineProperty(target, $$observableAdmin, {
     enumarable: false,
     configurable: false,
     writable: false,

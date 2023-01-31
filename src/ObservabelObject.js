@@ -1,9 +1,10 @@
 import { ObservableValue } from "./ObservableValue";
 import { isFunction } from './utils';
-
+import { $$observable } from "./constants";
 export class ObservableObject {
   constructor(target) {
     this._target = target;
+    this[$$observable] = true;
     this._values = Object.fromEntries(
       Object.entries(target)
         .map(([key, value]) => [key, new ObservableValue(value)])
