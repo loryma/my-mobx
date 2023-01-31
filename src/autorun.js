@@ -1,9 +1,7 @@
-import { globalState } from "./GlobalState";
+import { Reaction } from './Reaction';
 
 export function autorun(callback) {
-    const prevTrackingDerivation = globalState.trackingDerivation;
-
-    globalState.trackingDerivation = callback;
-    callback();
-    globalState.trackingDerivation = prevTrackingDerivation;
+  const reaction = new Reaction(callback);
+  reaction.track(callback);
+  return reaction.getDispose();
 }
