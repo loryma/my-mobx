@@ -3,6 +3,7 @@ import { isPrimitive, isObservable, isPureObject, isArray } from './utils';
 import { $$observable } from './constants';
 import { observableObject } from './observableObject';
 import { observableArray } from './observablArray';
+import { Atom } from './Atom';
 
 function enhancer(value) {
   if (isObservable(value)) return value;
@@ -12,9 +13,9 @@ function enhancer(value) {
   return value;
 }
 
-export class ObservableValue {
+export class ObservableValue extends Atom {
   constructor(value) {
-    this._observers = new Set();
+    super();
     this[$$observable] = true;
     this._value = enhancer(value);
   }
@@ -29,17 +30,5 @@ export class ObservableValue {
   set(newValue) {
     this._value = enhancer(newValue);
     this._notify();
-  }
-
-  observe(reaction) {
-    this._observers.add(reaction);
-  }
-
-  dispose(reaction) {
-    this._observers.delete(reaction);
-  }
-
-  _notify() {
-    this._observers.forEach((reaction) => reaction());
   }
 }

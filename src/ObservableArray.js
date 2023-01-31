@@ -2,6 +2,7 @@ import { isObservable, isPrimitive } from './utils';
 import { $$observable } from './constants';
 import { ObservableValue } from './ObservableValue';
 import { globalState } from './GlobalState';
+import { Atom } from './Atom';
 
 function arrayEnhancer(items) {
   return items.map((targetElement) => {
@@ -10,8 +11,9 @@ function arrayEnhancer(items) {
   });
 };
 
-export class ObservableArray {
+export class ObservableArray extends Atom {
   constructor(target) {
+    super();
     this._observers = new Set();
     this[$$observable] = true;
     this._target = target;
@@ -55,17 +57,5 @@ export class ObservableArray {
 
   getValues() {
     return this._values;
-  }
-
-  observe(reaction) {
-    this._observers.add(reaction);
-  }
-
-  dispose(reaction) {
-    this._observers.delete(reaction);
-  }
-
-  _notify() {
-    this._observers.forEach((reaction) => reaction());
   }
 }
