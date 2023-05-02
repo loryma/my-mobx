@@ -1,4 +1,5 @@
 import { $$observable } from "./constants";
+import { useState } from 'react';
 
 export function is(constructor, val) {
   return (val != null && val.constructor === constructor) || val instanceof constructor;
@@ -26,3 +27,8 @@ export function isArray(arg) {
 export function isFunction(arg) {
   return is(Function, arg);
 };
+
+export function useForceUpdate() {
+  const [, updateState] = useState({});
+  return () => updateState({});
+ }
